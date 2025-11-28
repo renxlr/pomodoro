@@ -11,6 +11,6 @@ self.addEventListener("message", (event) => {
 
     self.registration.showNotification(titulo, {
         body: corpo,
-        icon: "./assets/tomate.png"
+        icon: "/pomodoro/assets/tomate.png"
     });
 });
