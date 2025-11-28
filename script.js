@@ -1,8 +1,8 @@
-// registrar service worker
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("./sw.js")
-        .then(() => console.log("Service Worker registrado!"))
-        .catch(err => console.error("Erro ao registrar SW:", err));
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/pomodoro/sw.js')
+        .then(() => console.log('Service Worker registrado!'))
+        .catch((err) => console.error('Erro ao registrar SW:', err));
 }
 
 import { solicitarPermissao, exibirNotificacao } from './notification.js';
@@ -17,10 +17,14 @@ const bells = new Audio('./assets/happy-bell-alert.wav');
 atualizarDisplay();
 atualizarCiclosDisplay();
 
-document.addEventListener("DOMContentLoaded", () => {
-    document.body.addEventListener("click", () => {
-        solicitarPermissao();
-    }, { once: true });
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.addEventListener(
+        'click',
+        () => {
+            solicitarPermissao();
+        },
+        { once: true }
+    );
 });
 
 const btnStart = document.getElementById('start-btn');
