@@ -48,7 +48,7 @@ document
     .addEventListener('click', () => trocarModo('pausaLonga'));
 
 const tempos = {
-    pomodoro: 5,
+    pomodoro: 1500,
     pausaCurta: 300,
     pausaLonga: 900,
 };
