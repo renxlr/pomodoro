@@ -1,6 +1,6 @@
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-        .register('/pomodoro/sw.js')
+        .register('/sw.js')
         .then(() => console.log('Service Worker registrado!'))
         .catch((err) => console.error('Erro ao registrar SW:', err));
 }
