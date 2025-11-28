@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+h1 {
+    text-align: center;
+    letter-spacing: 6px;
+    font-size: 35px;
+}
+.pomodoro-container {
+    text-align: center;
+    margin-top: 200px;
+}
+
+.mode-selector {
+    margin-bottom: 90px;
+}
+.mode-button.active {
+    color: red;
+}
+.timer-display {
+    font-size: 50px;
+    font-weight: 600;
+    margin-bottom: 90px;
+    text-align: center;
+}
+.timer-controls {
+    margin-top: 70px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #3c4043;
+    padding: 15px 20px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+.cycle-tracker {
+    margin-top: 120px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+}
