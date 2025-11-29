@@ -12,43 +12,73 @@
         <title>Pomodoro</title>
     </head>
     <body>
-        <div class="pomodoro-container">
-            <header class="pomodoro-header">
-                <h1>Pomodoro</h1>
-            </header>
-
+        <div class="mode-selector-container">
             <div class="mode-selector">
                 <button id="pomodoro-mode" class="mode-button active">
-                    Pomodoro
+                    Pomodoro <span class="time-value"> 25/5</span>
                 </button>
-                <button id="pausaCurta-mode" class="mode-button">
-                    Pausa Curta
+                <button id="long-pomodoro-mode" class="mode-button">
+                    Pomodoro <span class="time-value"> 50/10</span>
                 </button>
-                <button id="pausaLonga-mode" class="mode-button">
-                    Pausa Longa
-                </button>
+            </div>
+            <button id="settings-btn" class="settings-btn">
+                <img src="./assets/config.png" alt="settings button" />
+            </button>
+        </div>
+        <div class="app-circle">
+            <div class="circle-shape">
+                <div class="semi-circle right-side circle-mask"></div>
+                <div class="semi-circle right-side circle"></div>
+                <div class="semi-circle left-side circle-mask"></div>
+                <div class="semi-circle left-side circle"></div>
             </div>
 
             <div class="timer-display">
                 <span id="time-minutes">25</span>
                 <span class="separator">:</span>
                 <span id="time-seconds">00</span>
-            </div>
-            <div class="timer-controls">
-                <button id="start-btn" class="control-btn primary">
-                    INICIAR
-                </button>
-                <button id="pause-btn" class="control-btn">PAUSAR</button>
-                <button id="reset-btn" class="control-btn">REINICIAR</button>
-            </div>
-            <div class="cycle-tracker">
-                <p>Ciclos Concluídos: <span id="ciclos-completos">0</span>/4</p>
+                <span id="session-type">foco</span>
             </div>
         </div>
+
+        <div class="timer-controls">
+            <button id="start-btn" class="control-btn primary">
+                <img src="./assets/play.png" alt="start button" />
+            </button>
+            <button id="pause-btn" class="control-btn">
+                <img src="./assets/pause.png" alt="pause button" />
+            </button>
+            <button id="reset-btn" class="control-btn">
+                <img src="./assets/reset.png" alt="reset button" />
+            </button>
+        </div>
+
+        <div class="cycle-tracker">
+            <p>
+                SESSÃO
+                <span id="ciclos-completos">0</span> DE
+                <span id="total-ciclos">4</span>
+            </p>
+        </div>
+
         <footer class="pomodoro-footer">
-            <img src="assets/github.png" alt="github logo" class="footer-logo" />
-            <a class="link" href="https://github.com/renxlr" target="_blank">Github</a>
+            <div class="footer-content">
+                <img
+                    src="assets/github.png"
+                    alt="github logo"
+                    class="footer-logo"
+                />
+                <a
+                    class="link"
+                    href="https://github.com/renxlr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Github
+                </a>
+            </div>
         </footer>
+
         <script type="module" src="./script.js"></script>
     </body>
 </html>
