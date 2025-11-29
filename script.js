@@ -50,7 +50,7 @@ document
 const tempos = {
     pomodoro: 1500,
     pausaCurta: 300,
-    pausaLonga: 900,
+    pausaLonga: 600,
 };
 
 function atualizarDisplay() {

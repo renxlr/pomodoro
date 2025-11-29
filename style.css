@@ -3,51 +3,122 @@
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('assets/blur.png');
+    background-size: cover;
+    background-position: center;
 }
+
 h1 {
     text-align: center;
-    letter-spacing: 6px;
+    letter-spacing: 4px;
     font-size: 35px;
+    margin-top: 40px;
 }
+
 .pomodoro-container {
     text-align: center;
-    margin-top: 200px;
+    margin-top: 80px;
 }
 
 .mode-selector {
-    margin-bottom: 90px;
+    margin-top: 50px;
+    margin-bottom: 100px;
 }
+
+.mode-selector button {
+    padding: 10px 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.116);
+    backdrop-filter: blur(120px);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.mode-selector button:hover {
+    transform: translateY(2px);
+    cursor: pointer;
+}
+
 .mode-button.active {
-    color: red;
+    color: rgb(76, 25, 99);
 }
+
 .timer-display {
     font-size: 50px;
     font-weight: 600;
-    margin-bottom: 90px;
+    margin-bottom: 40px;
     text-align: center;
 }
+
 .timer-controls {
-    margin-top: 70px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    margin-top: 100px;
+}
+
+.timer-controls button {
+    padding: 9px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.116);
+    backdrop-filter: blur(120px);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.timer-controls button:hover {
+    transform: translateY(2px);
+    cursor: pointer;
+}
+
+.timer-controls button:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
+.cycle-tracker {
+    margin-top: 40px;
+    text-align: center;
+    font-weight: 500;
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
+    align-items: center;
+    margin-top: auto;
     width: 100%;
     border-top: 1px solid #3c4043;
-    padding: 15px 20px;
+    padding: 15px 0px;
     font-size: 0.9rem;
     text-align: center;
+    background-color: #0000001e;
 }
-.cycle-tracker {
-    margin-top: 120px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgb(0, 0, 0);
+
+footer .link {
+    text-decoration: none;
+    color: #cfcfcf;
+    font-weight: 500;
+}
+
+footer .link:hover {
+    text-decoration: underline;
+    color: rgb(162, 56, 211);
+}
+.footer-logo {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-bottom: 4px;
+    filter: brightness(0) saturate(100%) invert(39%) sepia(83%) saturate(749%)
+        hue-rotate(253deg) brightness(60%) contrast(90%);
 }

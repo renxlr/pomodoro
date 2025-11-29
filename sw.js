@@ -11,6 +11,7 @@ self.addEventListener("message", (event) => {
 
     self.registration.showNotification(titulo, {
         body: corpo,
-        icon: "/pomodoro/assets/tomate.png"
+        silent: true,
+        icon: "/pomodoro/assets/tomate.png",
     });
 });
