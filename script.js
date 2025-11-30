@@ -6,81 +6,77 @@ if ('serviceWorker' in navigator) {
 }
 
 import { solicitarPermissao, exibirNotificacao } from './notification.js';
+
+const modos = {
+    pomodoro: { foco: 25 * 60, pausa: 5 * 60 },
+    longPomodoro: { foco: 50 * 60, pausa: 10 * 60 },
+};
+
 let modoAtual = 'pomodoro';
+let tipoSessao = 'foco';
 let ciclosCompletos = 0;
-let tempoRestante = 1500;
+let tempoRestante = modos[modoAtual][tipoSessao];
 let intervalo = null;
 let estaRodando = false;
+
+const btnStart = document.getElementById('start-btn');
+const btnPause = document.getElementById('pause-btn');
+const btnReset = document.getElementById('reset-btn');
 const modoBotoes = document.querySelectorAll('.mode-button');
 const bells = new Audio('./assets/happy-bell-alert.wav');
 
-atualizarDisplay();
-atualizarCiclosDisplay();
-
 document.addEventListener('DOMContentLoaded', () => {
-    document.body.addEventListener(
-        'click',
-        () => {
-            solicitarPermissao();
-        },
-        { once: true }
-    );
+    document.body.addEventListener(() => solicitarPermissao(), { once: true });
 });
 
-const btnStart = document.getElementById('start-btn');
 btnStart.addEventListener('click', iniciarTimer);
-
-const btnPause = document.getElementById('pause-btn');
 btnPause.addEventListener('click', pausarTimer);
 btnPause.disabled = true;
-
-const btnReset = document.getElementById('reset-btn');
 btnReset.addEventListener('click', reiniciarTimer);
 
 document
     .getElementById('pomodoro-mode')
     .addEventListener('click', () => trocarModo('pomodoro'));
 document
-    .getElementById('pausaCurta-mode')
-    .addEventListener('click', () => trocarModo('pausaCurta'));
-document
-    .getElementById('pausaLonga-mode')
-    .addEventListener('click', () => trocarModo('pausaLonga'));
-
-const tempos = {
-    pomodoro: 1500,
-    pausaCurta: 300,
-    pausaLonga: 600,
-};
+    .getElementById('long-pomodoro-mode')
+    .addEventListener('click', () => trocarModo('longPomodoro'));
 
 function atualizarDisplay() {
     let minutos = Math.floor(tempoRestante / 60);
     let segundos = tempoRestante % 60;
 
-    const displayMinutos = String(minutos).padStart(2, '0');
-    const displaySegundos = String(segundos).padStart(2, '0');
-
-    document.getElementById('time-minutes').textContent = displayMinutos;
-    document.getElementById('time-seconds').textContent = displaySegundos;
+    document.getElementById('time-minutes').textContent = String(
+        minutos
+    ).padStart(2, '0');
+    document.getElementById('time-seconds').textContent = String(
+        segundos
+    ).padStart(2, '0');
+    document.getElementById('session-type').textContent =
+        tipoSessao === 'foco' ? 'foco' : 'pausa';
+    document.getElementById('ciclos-completos').textContent = ciclosCompletos;
 }
 
 function contar() {
     if (tempoRestante > 0) {
         tempoRestante--;
         atualizarDisplay();
-    } else if (tempoRestante === 0) {
+    } else {
         clearInterval(intervalo);
         estaRodando = false;
-        tempoRestante = tempos[modoAtual];
-        atualizarDisplay();
-
         bells.play();
-        let tituloNotificacao =
-            modoAtual === 'pomodoro' ? 'FIM DO FOCO!' : 'FIM DA PAUSA!';
-        let corpoNotificacao =
-            modoAtual === 'pomodoro' ? 'Hora de Pausar.' : 'Hora de Voltar!';
-        exibirNotificacao(tituloNotificacao, corpoNotificacao);
-        setTimeout(proximoModo, 1000);
+
+        const titulo = tipoSessao === 'foco' ? 'FIM DO FOCO!' : 'FIM DA PAUSA!';
+        const corpo =
+            tipoSessao === 'foco'
+                ? 'Hora de Pausar.'
+                : 'Hora de Voltar ao foco!';
+        exibirNotificacao(titulo, corpo);
+
+        tipoSessao = tipoSessao === 'foco' ? 'pausa' : 'foco';
+        if (tipoSessao === 'foco') ciclosCompletos++;
+        tempoRestante = modos[modoAtual][tipoSessao];
+        atualizarDisplay();
+        iniciarTimer();
     }
 }
 
@@ -102,48 +98,26 @@ function pausarTimer() {
 
 function reiniciarTimer() {
     pausarTimer();
-    tempoRestante = tempos[modoAtual];
+    tipoSessao = 'foco';
+    ciclosCompletos = 0;
+    tempoRestante = modos[modoAtual][tipoSessao];
     atualizarDisplay();
     btnStart.disabled = false;
-
-    ciclosCompletos = 0;
-    atualizarCiclosDisplay();
+    btnPause.disabled = true;
 }
 
 function trocarModo(novoModo) {
     pausarTimer();
     modoAtual = novoModo;
-    tempoRestante = tempos[novoModo];
+    tipoSessao = 'foco';
+    ciclosCompletos = 0;
+    tempoRestante = modos[modoAtual][tipoSessao];
     atualizarDisplay();
 
-    btnStart.disabled = false;
-    btnPause.disabled = true;
-
-    const novoBotaoID = novoModo + '-mode';
-    modoBotoes.forEach((btn) => {
-        btn.classList.remove('active');
-        if (btn.id === novoBotaoID) {
-            btn.classList.add('active');
-        }
-    });
+    modoBotoes.forEach((btn) => btn.classList.remove('active'));
+    const btnId =
+        novoModo === 'pomodoro' ? 'pomodoro-mode' : 'long-pomodoro-mode';
+    document.getElementById(btnId).classList.add('active');
 }
 
-function proximoModo() {
-    if (modoAtual === 'pomodoro') {
-        ciclosCompletos++;
-        atualizarCiclosDisplay();
-        if (ciclosCompletos % 4 === 0) {
-            trocarModo('pausaLonga');
-        } else {
-            trocarModo('pausaCurta');
-        }
-    } else {
-        trocarModo('pomodoro');
-    }
-}
-
-function atualizarCiclosDisplay() {
-    document.getElementById('ciclos-completos').textContent = ciclosCompletos;
-}
-
-trocarModo(modoAtual);
+atualizarDisplay();
