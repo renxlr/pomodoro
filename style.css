@@ -1,15 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 :root {
     --cor-primaria: #6c17ae;
     --cor-secundaria: #bd67fe;
     --cor-fundo: #ffffff;
     --cor-texto: #ffffff;
-    --cor-botao: #bd67fe;
-    --cor-botao-hover: #bd67fe;
-    --cor-botao-ativo: #ffddc1;
-    --cor-circulo-fundo: #6c17ae;
-    --cor-circulo-progresso: var(--cor-primaria);
+    --cor-painel-aberto: #eeefee;
 
-    --tamanho-borda-raio: 8px;
     --sombra-leve: 0 4px 6px rgba(0, 0, 0, 0.1);
     --sombra-media: -10px 10px 0px var(--cor-secundaria);
 }
@@ -41,9 +38,25 @@ body {
     width: 280px;
     height: 280px;
     margin-bottom: 40px;
-    background-color: var(--cor-circulo-fundo);
+    background-color: var(--cor-primaria);
     border-radius: 50%;
     box-shadow: var(--sombra-media), inset 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.app-circle.modo-long .circle-mask {
+    background-color: var(--cor-secundaria);
+}
+
+.app-circle.modo-long {
+    box-shadow: -10px 10px 0px var(--cor-primaria); ;
+}
+
+.app-circle.modo-long .separator {
+    color: var(--cor-primaria);
+}
+
+.app-circle.modo-long #session-type {
+    color: var(--cor-primaria);
 }
 
 .circle-shape {
@@ -76,7 +89,7 @@ body {
     width: 200%;
     height: 100%;
     border-radius: 50%;
-    border: 20px solid var(--cor-circulo-progresso);
+    border: 20px solid var(--cor-primaria);
 }
 
 .right-side .circle {
@@ -90,7 +103,7 @@ body {
 }
 
 .circle-mask {
-    background-color: var(--cor-circulo-fundo);
+    background-color: var(--cor-primaria);
     visibility: visible;
 }
 
@@ -128,15 +141,16 @@ body {
 }
 
 .mode-button {
+    font-family: 'Poppins', sans-serif;
     flex: 1;
     background: transparent;
     border: none;
     color: var(--cor-secundaria);
-    padding: 10px 20px;
-    margin: 0;
+    padding: 7px 20px;
+    margin: 0 10px;
     cursor: pointer;
-    font-size: 0.9em;
-    font-weight: 500;
+    font-size: 1em;
+    font-weight: 300;
     border-radius: 50px;
     transition: background-color 0.3s, color 0.3s;
     text-align: left;
@@ -144,17 +158,19 @@ body {
     justify-content: space-between;
 }
 
+.mode-button.active {
+    background-color: var(--cor-primaria);
+    color: var(--cor-fundo);
+    box-shadow: var(--sombra-leve);
+    transform: scale(1.25);
+}
+
 .time-value {
     font-weight: 700;
     font-size: 1.1em;
     margin-left: 2px;
     color: var(--cor-secundaria);
-}
-
-.mode-button.active {
-    background-color: var(--cor-primaria);
-    color: var(--cor-fundo);
-    box-shadow: var(--sombra-leve);
+    transform: translateY(-1px);
 }
 
 .mode-button:hover:not(.active) {
@@ -177,6 +193,7 @@ body {
 .separator {
     margin: 0 -30px;
     color: var(--cor-secundaria);
+    font-size: 70px;
 }
 
 #time-minutes {
@@ -227,7 +244,7 @@ body {
     margin-top: -90px;
 }
 
-.control-btn:hover {
+.control-btn:hover:not(:disabled) {
     background-color: rgba(255, 255, 255, 0.1);
     border-color: var(--cor-secundaria);
     transition: border-color 0.3s ease, background-color 0.3s ease;
@@ -309,6 +326,7 @@ body {
     justify-content: center;
     align-items: center;
     top: calc(50% + 73px);
+    transition: transform 0.3s ease;
 }
 
 .control-btn img {
@@ -319,4 +337,60 @@ body {
 .settings-btn img {
     width: 40px;
     height: 40px;
+}
+
+.settings-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.settings-panel {
+    position: absolute;
+    top: 150px;
+    right: 430px;
+    width: 250px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    color: black;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin: 0;
+
+    /* painel fechado */
+    overflow: hidden;
+    max-height: 0;
+    padding: 0 20px 0 20px;
+    opacity: 0;
+    transition: max-height 0.5s ease-in-out, opacity 0.4s ease-in,
+        padding 0.5s ease-in-out;
+}
+
+.setting-button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    font-weight: 1000;
+    margin: 0;
+    border-radius: 50px;
+    padding: 10px 39px;
+    border: none;
+    background-color: #cc8bfe;
+    color: var(--cor-texto);
+    cursor: pointer;
+}
+
+#btn-editar-sessoes {
+    background-color: #500f85;
+}
+
+.settings-panel button + button {
+    margin-top: 15px;
+}
+
+.settings-panel.open {
+    max-height: 300px;
+    opacity: 1;
+    padding: 20px;
+    background-color: var(--cor-painel-aberto);
 }

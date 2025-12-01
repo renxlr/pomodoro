@@ -19,6 +19,8 @@ let tempoRestante = modos[modoAtual][tipoSessao];
 let intervalo = null;
 let estaRodando = false;
 
+const btnSettings = document.querySelector('.settings-btn');
+const settingsPanel = document.querySelector('#settingsPanel');
 const btnStart = document.getElementById('start-btn');
 const btnPause = document.getElementById('pause-btn');
 const btnReset = document.getElementById('reset-btn');
@@ -26,9 +28,14 @@ const modoBotoes = document.querySelectorAll('.mode-button');
 const bells = new Audio('./assets/happy-bell-alert.wav');
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.body.addEventListener(() => solicitarPermissao(), { once: true });
+    document.body.addEventListener('click', () => solicitarPermissao(), {
+        once: true,
+    });
 });
 
+btnSettings.addEventListener('click', () => {
+    settingsPanel.classList.toggle('open');
+});
 btnStart.addEventListener('click', iniciarTimer);
 btnPause.addEventListener('click', pausarTimer);
 btnPause.disabled = true;
@@ -76,7 +83,8 @@ function contar() {
         if (tipoSessao === 'foco') ciclosCompletos++;
         tempoRestante = modos[modoAtual][tipoSessao];
         atualizarDisplay();
-        iniciarTimer();
+        btnStart.disabled = false;
+        btnPause.disabled = true;
     }
 }
 
@@ -118,6 +126,21 @@ function trocarModo(novoModo) {
     const btnId =
         novoModo === 'pomodoro' ? 'pomodoro-mode' : 'long-pomodoro-mode';
     document.getElementById(btnId).classList.add('active');
+
+    atualizarCores();
+}
+
+function atualizarCores() {
+    const circle = document.querySelector('.app-circle');
+    circle.classList.remove('pomodoro', 'modo-long');
+
+    if (modoAtual === 'pomodoro') {
+        circle.classList.add('pomodoro');
+    } else if (modoAtual === 'longPomodoro') {
+        circle.classList.add('modo-long');
+    }
 }
 
 atualizarDisplay();
+
+console.log('made with love by renxlr');
