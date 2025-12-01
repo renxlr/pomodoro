@@ -26,7 +26,7 @@ const modoBotoes = document.querySelectorAll('.mode-button');
 const bells = new Audio('./assets/happy-bell-alert.wav');
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.body.addEventListener(() => solicitarPermissao(), { once: true });
+    document.body.addEventListener('click', () => solicitarPermissao(), { once: true });
 });
 
 btnStart.addEventListener('click', iniciarTimer);
