@@ -48,6 +48,15 @@ document
     .getElementById('long-pomodoro-mode')
     .addEventListener('click', () => trocarModo('longPomodoro'));
 
+function atualizarTitulo() {
+    let minutos = Math.floor(tempoRestante / 60);
+    let segundos = tempoRestante % 60;
+
+    const textoSessao = tipoSessao === 'foco' ? 'Foco' : 'Pausa';
+
+    document.title = `${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')} — ${textoSessao}`;
+}
+
 function atualizarDisplay() {
     let minutos = Math.floor(tempoRestante / 60);
     let segundos = tempoRestante % 60;
@@ -61,6 +70,8 @@ function atualizarDisplay() {
     document.getElementById('session-type').textContent =
         tipoSessao === 'foco' ? 'foco' : 'pausa';
     document.getElementById('ciclos-completos').textContent = ciclosCompletos;
+
+    atualizarTitulo();
 }
 
 function contar() {
