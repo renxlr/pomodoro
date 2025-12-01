@@ -47,3 +47,10 @@ https://renxlr.github.io/pomodoro/
 - Tarefas
 - Tema claro/escuro
 - Salvar configurações no localStorage
+
+---
+
+## 📜 Licença
+
+Este projeto está sob a licença MIT.  
+Sinta-se livre para usar, modificar e compartilhar mas mantenha os créditos!
