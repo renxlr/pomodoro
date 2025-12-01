@@ -105,6 +105,8 @@ function pausarTimer() {
 }
 
 function reiniciarTimer() {
+    const confirmar = confirm('Reiniciar o timer?');
+    if (!confirmar) return;
     pausarTimer();
     tipoSessao = 'foco';
     ciclosCompletos = 0;
