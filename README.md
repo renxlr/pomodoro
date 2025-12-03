@@ -25,7 +25,8 @@ A ideia é trabalhar com a mente descansada, aumentando a produtividade e reduzi
 ## 🚀 Demo  
 https://renxlr.github.io/pomodoro/
 
-<img width="1919" height="949" alt="image" src="https://github.com/user-attachments/assets/93a83f8a-998e-4853-bb2c-50889d7c319b" />
+![1202](https://github.com/user-attachments/assets/e7c1bca3-e0e6-4c07-91e4-12b73e8e5c8c)
+
 
 ---
 
