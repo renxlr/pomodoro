@@ -42,11 +42,13 @@ https://renxlr.github.io/pomodoro/
 ---
 
 ## 📌 Melhorias Futuras
-- Editar sessões
-- Configurações de tempo
+- Editar sessões ✅
+- Configurações de tempo ✅
 - Tarefas
 - Tema claro/escuro
 - Salvar configurações no localStorage
+- Responsividade para diferentes resoluções
+- Bônus: Lo-fi com botão para silenciar
 
 ---
 

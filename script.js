@@ -33,13 +33,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+const editSessionsPanel = document.getElementById('editSessionsPanel');
+document.getElementById('btn-voltar-sessoes').addEventListener('click', () => {
+    editSessionsPanel.classList.remove('open');
+    settingsPanel.classList.add('open');
+});
+
 btnSettings.addEventListener('click', () => {
     settingsPanel.classList.toggle('open');
+    editSessionsPanel.classList.remove('open');
+    
 });
 btnStart.addEventListener('click', iniciarTimer);
 btnPause.addEventListener('click', pausarTimer);
 btnPause.disabled = true;
 btnReset.addEventListener('click', reiniciarTimer);
+
+document
+    .getElementById('btn-editar-sessoes')
+    .addEventListener('click', abrirEditarSessoes);
+
+document
+    .getElementById('btn-salvar-sessoes')
+    .addEventListener('click', salvarSessoes);
+
+document
+    .getElementById('btn-resetar-sessoes')
+    .addEventListener('click', resetarSessoes);
+
+document
+    .getElementById('btn-personalizar')
+    .addEventListener('click', abrirPersonalizar);
+
+document
+.getElementById('btn-tarefas')
+.addEventListener('click', abrirTarefas);
 
 document
     .getElementById('pomodoro-mode')
@@ -54,7 +82,9 @@ function atualizarTitulo() {
 
     const textoSessao = tipoSessao === 'foco' ? 'Foco' : 'Pausa';
 
-    document.title = `${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')} — ${textoSessao}`;
+    document.title = `${String(minutos).padStart(2, '0')}:${String(
+        segundos
+    ).padStart(2, '0')} — ${textoSessao}`;
 }
 
 function atualizarDisplay() {
@@ -140,6 +170,14 @@ function trocarModo(novoModo) {
         novoModo === 'pomodoro' ? 'pomodoro-mode' : 'long-pomodoro-mode';
     document.getElementById(btnId).classList.add('active');
 
+    if (modoAtual === 'pomodoro') {
+        document.getElementById('input-foco').value = modos['pomodoro'].foco / 60
+        document.getElementById('input-pausa').value = modos['pomodoro'].pausa / 60
+    } else {
+        document.getElementById('input-foco').value = modos['longPomodoro'].foco / 60
+        document.getElementById('input-pausa').value = modos['longPomodoro'].pausa / 60
+    }
+
     atualizarCores();
 }
 
@@ -152,6 +190,68 @@ function atualizarCores() {
     } else if (modoAtual === 'longPomodoro') {
         circle.classList.add('modo-long');
     }
+}
+
+function abrirEditarSessoes() {
+    settingsPanel.classList.remove('open');
+    editSessionsPanel.classList.add('open');
+}
+
+function salvarSessoes() {
+    const focoInput = Number(document.getElementById('input-foco').value);
+    const pausaInput = Number(document.getElementById('input-pausa').value);
+
+    if (focoInput <= 0 || pausaInput <= 0) {
+        alert('Por favor, insira valores positivos para foco e pausa.');
+        return;
+    }
+
+    modos[modoAtual].foco = focoInput * 60;
+    modos[modoAtual].pausa = pausaInput * 60;
+
+    const botaoAtivo = document.querySelector('.mode-button.active');
+    if (botaoAtivo) {
+        const spanTempo = botaoAtivo.querySelector('.time-value');
+        spanTempo.textContent = `${String(focoInput)}/${String(pausaInput)}`;
+
+        const sessoesInput = document.getElementById('input-sessoes').value;
+        document.getElementById('total-ciclos').textContent = sessoesInput;
+    }
+
+    pausarTimer();
+    tipoSessao = 'foco';
+    tempoRestante = modos[modoAtual][tipoSessao];
+    atualizarDisplay();
+}
+
+function resetarSessoes() {
+    modos['pomodoro'].foco = 25 * 60;
+    modos['pomodoro'].pausa = 5 * 60;
+    modos['longPomodoro'].foco = 50 * 60;
+    modos['longPomodoro'].pausa = 10 * 60;
+
+    tempoRestante = modos[modoAtual][tipoSessao];
+    pausarTimer();
+    atualizarDisplay();
+
+const botaoAtivo = document.querySelector('.mode-button.active');
+    if (botaoAtivo) {
+        const spanTempo = botaoAtivo.querySelector('.time-value');
+        spanTempo.textContent = `${modos[modoAtual].foco / 60}/${modos[modoAtual].pausa / 60}`;
+    }
+
+    document.getElementById('input-foco').value = modos[modoAtual].foco / 60;
+    document.getElementById('input-pausa').value = modos[modoAtual].pausa / 60;
+    document.getElementById('input-sessoes').value = 4;
+    document.getElementById('total-ciclos').textContent = 4;
+}
+
+function abrirPersonalizar() {
+    alert('Funcionalidade de personalização em desenvolvimento!');
+}
+
+function abrirTarefas() {
+    alert('Funcionalidade de tarefas em desenvolvimento!');
 }
 
 atualizarDisplay();

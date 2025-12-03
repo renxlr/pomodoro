@@ -15,10 +15,16 @@
         <div class="mode-selector-container">
             <div class="mode-selector">
                 <button id="pomodoro-mode" class="mode-button active">
-                    POMODORO <span class="time-value"> 25/5</span>
+                    POMODORO
+                    <span class="time-value" id="time-value-mode-selector">
+                        25/5</span
+                    >
                 </button>
                 <button id="long-pomodoro-mode" class="mode-button">
-                    POMODORO <span class="time-value"> 50/10</span>
+                    POMODORO
+                    <span class="time-value" id="time-value-long-mode-selector">
+                        50/10</span
+                    >
                 </button>
             </div>
             <button id="settings-btn" class="settings-btn">
@@ -87,6 +93,37 @@
                 EDITAR SESSÕES
             </button>
             <button id="btn-tarefas" class="setting-button">TAREFAS</button>
+        </div>
+        <div class="edit-sessions-panel" id="editSessionsPanel">
+            <div class="panel-header">
+                <button
+                    id="btn-voltar-sessoes"
+                    class="setting-button back-button">
+                        <
+                </button>
+                <h2>Editar Sessões</h2>
+            </div>
+
+            <div class="input-group">
+                <label>Foco (min)</label>
+                <input type="number" id="input-foco" min="1" value="25" />
+            </div>
+
+            <div class="input-group">
+                <label>Pausa (min)</label>
+                <input type="number" id="input-pausa" min="1" value="5" />
+            </div>
+            <div class="input-group">
+                <label>Sessões</label>
+                <input type="number" id="input-sessoes" min="1" value="4" />
+            </div>
+
+            <button id="btn-salvar-sessoes" class="setting-button">
+                SALVAR
+            </button>
+            <button id="btn-resetar-sessoes" class="setting-button">
+                RESETAR
+            </button>
         </div>
         <script type="module" src="./script.js"></script>
     </body>
