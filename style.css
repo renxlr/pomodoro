@@ -6,9 +6,16 @@
     --cor-fundo: #ffffff;
     --cor-texto: #ffffff;
     --cor-painel-aberto: #eeefee;
+    --cor-texto-painel: #454545;
 
     --sombra-leve: 0 4px 6px rgba(0, 0, 0, 0.1);
     --sombra-media: -10px 10px 0px var(--cor-secundaria);
+}
+
+body.dark {
+    --cor-fundo: #121212;
+    --cor-painel-aberto: #1E1E1E;
+    --cor-texto-painel: #fdfdfd;
 }
 
 * {
@@ -423,11 +430,7 @@ body {
     padding: 20px;
     display: flex;
     background-color: var(--cor-painel-aberto);
-    color: #454545;
-}
-
-#btn-voltar-sessoes {
-    background-color: #500f85;
+    color: var(--cor-texto-painel);
 }
 
 .edit-sessions-panel input {
@@ -466,22 +469,6 @@ body {
     margin-bottom: 5px;
 }
 
-.back-button {
-    padding: 5px 10px;
-    font-weight: 500;
-    font-size: 1em;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: var(--cor-primaria);
-    color: var(--cor-fundo);
-    margin-right: 7px;
-}
-
-.back-button:hover {
-    background-color: var(--cor-secundaria);
-}
-
 .edit-sessions-panel h2 {
     margin: 0;
     font-size: 1.5em;
@@ -489,16 +476,6 @@ body {
 
 .panel-header h2 {
     font-size: 1.3em;
-}
-#btn-voltar-sessoes {
-    background-color: #c0c0c0;
-    color: #454545;
-}
-
-#btn-voltar-sessoes:hover {
-    background-color: #a0a0a0;
-    transform: scale(1.1);
-    cursor: pointer;
 }
 
 #btn-resetar-sessoes:hover,
@@ -514,4 +491,80 @@ body {
 #btn-salvar-sessoes,
 #btn-resetar-sessoes {
     background-color: var(--cor-primaria);
+}
+
+.personalize-panel {
+    position: absolute;
+    top: 150px;
+    right: 430px;
+    width: 250px;
+
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    color: black;
+    backdrop-filter: blur(10px);
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    overflow: hidden;
+    max-height: 0;
+    padding: 0 20px;
+    opacity: 0;
+
+    transition: max-height .2s ease-in-out, opacity .2s ease-in, padding .3s ease-in-out;
+}
+
+.personalize-panel.open {
+    max-height: 500px;
+    opacity: 1;
+    padding: 20px;
+    background-color: var(--cor-painel-aberto);
+    color: var(--cor-texto-painel);
+}
+
+.personalize-panel .setting-button {
+    color: var(--cor-texto);
+    background-color: var(--cor-secundaria);
+}
+
+.personalize-panel .setting-button img {
+    width: 40px;
+    height: 40px;
+}
+
+.back-button {
+    padding: 5px 10px;
+    font-weight: 600;
+    font-size: 1em;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    background-color: #c1c1c1;
+    color: var(--cor-texto-painel);
+    margin-right: 7px;
+}
+
+.back-button:hover {
+    background-color: #a1a1a1;
+    cursor: pointer;
+}
+
+#btn-darkmode {
+    width: 70px;
+    height: 70px;
+    padding: 5px;
+    border-radius: 50%;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #c1c1c1;
+}
+
+#btn-darkmode:hover {
+    background-color: #a1a1a1
 }

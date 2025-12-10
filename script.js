@@ -21,6 +21,7 @@ let estaRodando = false;
 
 const btnSettings = document.querySelector('.settings-btn');
 const settingsPanel = document.querySelector('#settingsPanel');
+const personalizePanel = document.getElementById('personalizePanel');
 const btnStart = document.getElementById('start-btn');
 const btnPause = document.getElementById('pause-btn');
 const btnReset = document.getElementById('reset-btn');
@@ -42,7 +43,7 @@ document.getElementById('btn-voltar-sessoes').addEventListener('click', () => {
 btnSettings.addEventListener('click', () => {
     settingsPanel.classList.toggle('open');
     editSessionsPanel.classList.remove('open');
-    
+    personalizePanel.classList.remove('open');
 });
 btnStart.addEventListener('click', iniciarTimer);
 btnPause.addEventListener('click', pausarTimer);
@@ -65,9 +66,7 @@ document
     .getElementById('btn-personalizar')
     .addEventListener('click', abrirPersonalizar);
 
-document
-.getElementById('btn-tarefas')
-.addEventListener('click', abrirTarefas);
+document.getElementById('btn-tarefas').addEventListener('click', abrirTarefas);
 
 document
     .getElementById('pomodoro-mode')
@@ -234,7 +233,7 @@ function resetarSessoes() {
     pausarTimer();
     atualizarDisplay();
 
-const botaoAtivo = document.querySelector('.mode-button.active');
+    const botaoAtivo = document.querySelector('.mode-button.active');
     if (botaoAtivo) {
         const spanTempo = botaoAtivo.querySelector('.time-value');
         spanTempo.textContent = `${modos[modoAtual].foco / 60}/${modos[modoAtual].pausa / 60}`;
@@ -246,9 +245,36 @@ const botaoAtivo = document.querySelector('.mode-button.active');
     document.getElementById('total-ciclos').textContent = 4;
 }
 
-function abrirPersonalizar() {
-    alert('Funcionalidade de personalização em desenvolvimento!');
+const btnDark = document.getElementById('btn-darkmode');
+const iconDark = document.getElementById('icon-darkmode');
+
+if (localStorage.getItem('tema') === 'dark') {
+    document.body.classList.add('dark');
+    iconDark.src = './assets/sun.png';
 }
+
+btnDark.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+
+    const darkAtivo = document.body.classList.contains('dark');
+
+    iconDark.src = darkAtivo ? './assets/sun.png' : './assets/moon.png';
+
+    localStorage.setItem('tema', darkAtivo ? 'dark' : 'light');
+});
+
+function abrirPersonalizar() {
+    settingsPanel.classList.remove('open');
+    editSessionsPanel.classList.remove('open');
+    personalizePanel.classList.add('open');
+}
+
+document
+    .getElementById('btn-voltar-personalizar')
+    .addEventListener('click', () => {
+        personalizePanel.classList.remove('open');
+        settingsPanel.classList.add('open');
+    });
 
 function abrirTarefas() {
     alert('Funcionalidade de tarefas em desenvolvimento!');
