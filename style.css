@@ -143,8 +143,8 @@ body {
     border-radius: 50px;
     box-shadow: none;
     padding: -1px;
-    margin-top: 100px;
-    margin-bottom: -3rem;
+    margin-top: 60px;
+    margin-bottom: 20px;
 }
 
 .mode-button {
@@ -248,7 +248,6 @@ body {
     text-align: center;
     text-transform: uppercase;
     box-shadow: none;
-    margin-top: -90px;
 }
 
 .control-btn:hover:not(:disabled) {
@@ -265,8 +264,8 @@ body {
 .cycle-tracker p {
     font-size: 1em;
     font-weight: 500;
+    margin-bottom: 100px;
     color: var(--cor-secundaria);
-    margin-top: -130px;
 }
 
 #ciclos-completos {
@@ -332,7 +331,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: calc(50% + 73px);
+    top: calc(10% + 73px);
     transition: transform 0.3s ease;
 }
 
@@ -351,9 +350,10 @@ body {
 }
 
 .settings-panel {
-    position: absolute;
+    position: fixed;
     top: 150px;
-    right: 430px;
+    left: calc(50% + 180px);
+    z-index: 1000;
     width: 250px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -399,9 +399,10 @@ body {
 }
 
 .edit-sessions-panel {
-    position: absolute;
+    position: fixed;
     top: 150px;
-    right: 430px;
+    left: calc(50% + 180px);
+    z-index: 1000;
     width: 250px;
 
     background: rgba(255, 255, 255, 0.1);
@@ -494,9 +495,10 @@ body {
 }
 
 .personalize-panel {
-    position: absolute;
+    position: fixed;
     top: 150px;
-    right: 430px;
+    left: calc(50% + 180px);
+    z-index: 1000;
     width: 250px;
 
     background: rgba(255, 255, 255, 0.1);
@@ -567,4 +569,23 @@ body {
 
 #btn-darkmode:hover {
     background-color: #a1a1a1
+}
+
+@media (max-width: 1200px) {
+    .settings-panel, .edit-sessions-panel, .personalize-panel {
+        left: auto !important;
+        right: 10px !important;
+        top: 150px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .settings-panel, .edit-sessions-panel, .personalize-panel {
+        left: auto !important;
+        right: 50% !important;
+        transform: translateX(50%) !important;
+        top: 200px !important;
+        width: 90% !important;
+        max-width: 300px;
+    }
 }
