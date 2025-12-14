@@ -14,7 +14,7 @@ const modos = {
 
 let modoAtual = 'pomodoro';
 let tipoSessao = 'foco';
-let ciclosCompletos = 0;
+let ciclosCompletos = 1;
 let tempoRestante = modos[modoAtual][tipoSessao];
 let intervalo = null;
 let estaRodando = false;
@@ -170,7 +170,7 @@ function reiniciarTimer() {
     if (!confirmar) return;
     pausarTimer();
     tipoSessao = 'foco';
-    ciclosCompletos = 0;
+    ciclosCompletos = 1;
     tempoRestante = modos[modoAtual][tipoSessao];
     atualizarDisplay();
     btnStart.disabled = false;
@@ -181,7 +181,7 @@ function trocarModo(novoModo) {
     pausarTimer();
     modoAtual = novoModo;
     tipoSessao = 'foco';
-    ciclosCompletos = 0;
+    ciclosCompletos = 1;
     tempoRestante = modos[modoAtual][tipoSessao];
     atualizarDisplay();
 
