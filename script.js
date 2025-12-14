@@ -18,6 +18,7 @@ let ciclosCompletos = 0;
 let tempoRestante = modos[modoAtual][tipoSessao];
 let intervalo = null;
 let estaRodando = false;
+let autoBreak = localStorage.getItem('autoBreak') === 'true';
 
 const btnSettings = document.querySelector('.settings-btn');
 const settingsPanel = document.querySelector('#settingsPanel');
@@ -33,6 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
         once: true,
     });
 });
+
+const autoBreakCheckbox = document.getElementById('auto-break');
+
+if (autoBreakCheckbox) {
+    autoBreakCheckbox.checked = autoBreak;
+
+    autoBreakCheckbox.addEventListener('change', () => {
+        autoBreak = autoBreakCheckbox.checked;
+        localStorage.setItem('autoBreak', autoBreak);
+    });
+}
 
 const editSessionsPanel = document.getElementById('editSessionsPanel');
 document.getElementById('btn-voltar-sessoes').addEventListener('click', () => {
@@ -120,11 +132,20 @@ function contar() {
         exibirNotificacao(titulo, corpo);
 
         tipoSessao = tipoSessao === 'foco' ? 'pausa' : 'foco';
-        if (tipoSessao === 'foco') ciclosCompletos++;
+
+        if (tipoSessao === 'foco') {
+            ciclosCompletos++;
+        }
+
         tempoRestante = modos[modoAtual][tipoSessao];
         atualizarDisplay();
-        btnStart.disabled = false;
-        btnPause.disabled = true;
+
+        if (tipoSessao === 'pausa' && autoBreak) {
+            iniciarTimer();
+        } else {
+            btnStart.disabled = false;
+            btnPause.disabled = true;
+        }
     }
 }
 

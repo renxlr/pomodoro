@@ -96,12 +96,7 @@
         </div>
         <div class="edit-sessions-panel" id="editSessionsPanel">
             <div class="panel-header">
-                <button
-                    id="btn-voltar-sessoes"
-                    class="back-button"
-                >
-                    <
-                </button>
+                <button id="btn-voltar-sessoes" class="back-button"><</button>
                 <h2>Editar Sessões</h2>
             </div>
 
@@ -125,13 +120,27 @@
             <button id="btn-resetar-sessoes" class="setting-button">
                 RESETAR
             </button>
+            <div class="input-group switch-group">
+                <span for="auto-break" class="switch-span">
+                    Pausa automática
+                </span>
+
+                <span
+                    class="info-icon"
+                    data-tooltip="Quando ativado, a pausa começa automaticamente ao finalizar o foco."
+                >
+                    <img src="./assets/info.png" alt="information">
+                </span>
+
+                <label class="switch">
+                    <input type="checkbox" id="auto-break" />
+                    <span class="slider"></span>
+                </label>
+            </div>
         </div>
         <div class="personalize-panel" id="personalizePanel">
             <div class="panel-header">
-                <button
-                    id="btn-voltar-personalizar"
-                    class="back-button"
-                >
+                <button id="btn-voltar-personalizar" class="back-button">
                     <
                 </button>
                 <h2>Personalizar</h2>
