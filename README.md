@@ -48,7 +48,7 @@ https://renxlr.github.io/pomodoro/
 - Tarefas
 - Tema claro/escuro ✅
 - Salvar configurações no localStorage
-- Responsividade para diferentes resoluções
+- Responsividade para diferentes resoluções ✅
 - Bônus: Lo-fi com botão para silenciar
 
 ---
