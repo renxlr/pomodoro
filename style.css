@@ -643,6 +643,10 @@ input:checked + .slider::before {
     height: 1em;
 }
 
+body.dark .info-icon img {
+    filter: brightness(0) invert(1);
+}
+
 .info-icon::after {
     content: attr(data-tooltip);
     position: absolute;
