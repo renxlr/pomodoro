@@ -8,7 +8,7 @@ if ('serviceWorker' in navigator) {
 import { solicitarPermissao, exibirNotificacao } from './notification.js';
 
 const modos = {
-    pomodoro: { foco: 25 * 60, pausa: 5 * 60 },
+    pomodoro: { foco: 25 * 60, pausa: 50 * 60 },
     longPomodoro: { foco: 50 * 60, pausa: 10 * 60 },
 };
 
@@ -140,7 +140,7 @@ function contar() {
         tempoRestante = modos[modoAtual][tipoSessao];
         atualizarDisplay();
 
-        if (tipoSessao === 'pausa' && autoBreak) {
+        if (autoBreak) {
             iniciarTimer();
         } else {
             btnStart.disabled = false;
@@ -166,11 +166,9 @@ function pausarTimer() {
 }
 
 function reiniciarTimer() {
-    const confirmar = confirm('Reiniciar o timer?');
+    const confirmar = confirm(`Reiniciar a sessão de ${tipoSessao === 'foco' ? 'foco' : 'pausa'}?`);
     if (!confirmar) return;
     pausarTimer();
-    tipoSessao = 'foco';
-    ciclosCompletos = 1;
     tempoRestante = modos[modoAtual][tipoSessao];
     atualizarDisplay();
     btnStart.disabled = false;
